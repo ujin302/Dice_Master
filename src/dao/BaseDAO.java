@@ -17,7 +17,7 @@ public class BaseDAO {
 
 	// DB 연결
 	public void getConnection() {
-		
+		System.out.println();
 	}
 	
 	// DB 종료 1
