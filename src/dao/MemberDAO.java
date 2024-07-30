@@ -20,7 +20,7 @@ public class MemberDAO extends BaseDAO {
 	// 회원정보 저장, 매개변수 : id, pw, num(1 or 2)
 	public int loginMember() {
 		int num = 0;
-		
+		// git commit		
 		return num;
 	}
 }
