@@ -1,8 +1,5 @@
 package main;
 
-import dao.BaseDAO;
-import dao.MemberDAO;
-import dto.MemberDTO;
 import service.MenuService;
 
 public class IndexMain {

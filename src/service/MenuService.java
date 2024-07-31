@@ -35,6 +35,7 @@ public class MenuService {
 			}
 			else System.out.println("메뉴 중에서 선택해주세요.");
 			
+			System.out.println();
 		}
 	}
 	
@@ -59,13 +60,14 @@ public class MenuService {
 			num = sc.nextInt();
 			
 			if(num == 1 || num == 2) {
-				new MemberService().joinMembership(num);
+				new MemberService(num).joinMembership();
 			}else if(num == 3) {
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
 				break;
 			}
 			else System.out.println("메뉴 중에서 선택해주세요.");
 			
+			System.out.println();
 		}
 	}
 	
@@ -89,18 +91,15 @@ public class MenuService {
 			
 			num = sc.nextInt();
 			
-			if(num == 1 || num == 2) {
-				// 로그인 진행
-				new MemberService().login(num);
-				// 각자 메뉴 이동
-				if(num == 1) userMenu(); // 사용자 메뉴
-				else adminMenu(); // 관리자 메뉴
+			if(num == 1 || num == 2) { // 로그인 진행
+				new MemberService(num).login();
 			}else if(num == 3) {
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
 				break;
 			}
 			else System.out.println("메뉴 중에서 선택해주세요.");
 			
+			System.out.println();
 		}
 	}
 	
@@ -118,10 +117,9 @@ public class MenuService {
 		 */
 		
 		sc = new Scanner(System.in);
-		Member meber = null;
+		Member member = null;
 		
 		while(true) {
-			
 			System.out.println("\n----------------------------- 사용자 -----------------------------\n");
 			System.out.println("\t1. 게임\t2. 사용자 정보 수정\t3. 로그아웃\t4. 탈퇴");
 			System.out.println("\t* 3, 4 번 선택 시, Main 메뉴로 이동합니다. \n");
@@ -131,16 +129,20 @@ public class MenuService {
 			num = sc.nextInt();
 			
 			if(num == 1) {
-				
+				// 게임 메뉴 함수 호출
 			}else if(num == 2) {
-				meber = new Uesr_Update();
+				member = new Uesr_UpdateService();
 			}
 			else if(num == 3 || num == 4) {
-				System.out.println("Main 메뉴로 돌아갑니다. \n");
+				if(num == 3) System.out.print("로그아웃 되었습니다. ");
+				else new MemberService(1).delete();
+				
+				System.out.println("Main 메뉴로 돌아갑니다.\n");
 				break;
 			}
 			else System.out.println("메뉴 중에서 선택해주세요.");
 			
+			System.out.println();
 		}
 		
 	}
@@ -161,6 +163,7 @@ public class MenuService {
 		 */
 		
 		sc = new Scanner(System.in);
+		Member member = null;
 		
 		while(true) {
 			
@@ -172,14 +175,26 @@ public class MenuService {
 			
 			num = sc.nextInt();
 			
-			if(num == 1 || num == 2) {
+			if(num == 1) { // 회원 목록 
+				member = new Admin_UserListService();
+			} else if(num == 2) { // 회원 삭제
+				member = new Admin_UserDeleteService();
+			} else if(num == 3) { // 회원 관리 
+				member = new Admin_UserControlService();
+			} else if(num == 4) { // 관리자 정보 수정 
+				member = new Admin_UpdateService();
+			} else if(num == 5 || num == 6) { // 로그아웃 || 탈퇴
+				if(num == 5) System.out.print("로그아웃 되었습니다. ");
+				else new MemberService(2).delete();
 				
-			}else if(num == 3) {
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
 				break;
 			}
 			else System.out.println("메뉴 중에서 선택해주세요.");
 			
+			member.execute();
+			
+			System.out.println();
 		}
 	}
 	
