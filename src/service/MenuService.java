@@ -1,35 +1,151 @@
 package service;
 
+import java.util.Scanner;
+import service.user.*;
+import service.admin.*;
+
 public class MenuService {
+	Scanner sc;
+	int num;
+	
 	public void mainMenu() {
 		/*
 		 * 1. 회원가입 >> JoinMenu(); 함수 호출
 		 * 2. 로그인 >> LoginMenu(); 함수 호출
 		 */
+		
+		sc = new Scanner(System.in);
+		boolean isSelect = true;
+		
+		while(isSelect) {
+			
+			System.out.println("\n------------------------------ Main ------------------------------\n");
+			System.out.println("\t1. 회원가입\t2. 로그인\t3. 종료 \n");
+			System.out.println("------------------------------------------------------------------");
+			System.out.print("\t메뉴 선택 : ");
+			
+			num = sc.nextInt();
+			
+			if(num == 1) {
+				joinMenu();
+			}else if(num == 2) loginMenu();
+			else if(num == 3) {
+				isSelect = false;
+				System.out.println("프로그램이 종료되었습니다.");
+			}
+			else System.out.println("메뉴 중에서 선택해주세요.");
+			
+		}
 	}
 	
-	public void JoinMenu() {
+	public void joinMenu() {
 		/*
-		 * 1. 사용자 >> new UserService().joinMembership(1);
-		 * 2. 관리자 >> new AdminService().joinMembership(2);
-		 * 3. 메인 메뉴
+		 * 1. 사용자 >> joinMembership(1);
+		 * 2. 관리자 >> joinMembership(2);
+		 * 3. Main 메뉴
 		 * 
 		 * joinMembership(num); 함수 호출
 		 */
 		
+		sc = new Scanner(System.in);
+		
+		while(true) {
+			
+			System.out.println("\n----------------------------- 회원가입 -----------------------------\n");
+			System.out.println("\t1. 사용자\t2. 관리자\t3. Main 메뉴\n");
+			System.out.println("------------------------------------------------------------------");
+			System.out.print("\t메뉴 선택 : ");
+			
+			num = sc.nextInt();
+			
+			if(num == 1 || num == 2) {
+				new MemberService().joinMembership(num);
+			}else if(num == 3) {
+				System.out.println("Main 메뉴로 돌아갑니다. \n");
+				break;
+			}
+			else System.out.println("메뉴 중에서 선택해주세요.");
+			
+		}
 	}
 	
-	public void LoginMenu() {
+	public void loginMenu() {
 		/*
-		 * 1. 사용자 >> new UserService.login(1);
-		 * 2. 관리자 >> new AdminService.login(2);
-		 * 3. 메인 메뉴
+		 * 1. 사용자 >> login(1);
+		 * 2. 관리자 >> login(2);
+		 * 3. Main 메뉴
 		 * 
 		 * login(); 함수 호출
 		 */
+		
+		sc = new Scanner(System.in);
+		
+		while(true) {
+			
+			System.out.println("\n----------------------------- 로그인 -----------------------------\n");
+			System.out.println("\t1. 사용자\t2. 관리자\t3. Main 메뉴\n");
+			System.out.println("------------------------------------------------------------------");
+			System.out.print("\t메뉴 선택 : ");
+			
+			num = sc.nextInt();
+			
+			if(num == 1 || num == 2) {
+				// 로그인 진행
+				new MemberService().login(num);
+				// 각자 메뉴 이동
+				if(num == 1) userMenu(); // 사용자 메뉴
+				else adminMenu(); // 관리자 메뉴
+			}else if(num == 3) {
+				System.out.println("Main 메뉴로 돌아갑니다. \n");
+				break;
+			}
+			else System.out.println("메뉴 중에서 선택해주세요.");
+			
+		}
 	}
 	
-	public void AdminMenu() {
+	public void userMenu() {
+		/*
+		 * 1. 게임 >> new User_Game();
+		 * 2. 사용자 정보 수정 >> new Uesr_Update();
+		 * 3. 로그아웃 >> return;
+		 * 4. 탈퇴 >> new User_Delete();
+		 * 
+		 * execute(); 함수 호출
+		 * 
+		 * new 다음은 클래스명을 의미하며 각 class 파일을 만들어주세요! 
+		 * 또한, 모든 클래스는 Member 인터페이스를 implements 합니다! 
+		 */
+		
+		sc = new Scanner(System.in);
+		Member meber = null;
+		
+		while(true) {
+			
+			System.out.println("\n----------------------------- 사용자 -----------------------------\n");
+			System.out.println("\t1. 게임\t2. 사용자 정보 수정\t3. 로그아웃\t4. 탈퇴");
+			System.out.println("\t* 3, 4 번 선택 시, Main 메뉴로 이동합니다. \n");
+			System.out.println("------------------------------------------------------------------");
+			System.out.print("\t메뉴 선택 : ");
+			
+			num = sc.nextInt();
+			
+			if(num == 1) {
+				
+			}else if(num == 2) {
+				meber = new Uesr_Update();
+			}
+			else if(num == 3 || num == 4) {
+				System.out.println("Main 메뉴로 돌아갑니다. \n");
+				break;
+			}
+			else System.out.println("메뉴 중에서 선택해주세요.");
+			
+		}
+		
+	}
+	
+	public void adminMenu() {
 		/*
 		 * 1. 회원 목록 >> new Admin_UserList();
 		 * 2. 회원 삭제 >> new Admin_UserDelete();
@@ -44,21 +160,27 @@ public class MenuService {
 		 * 또한, 모든 클래스는 Member 인터페이스를 implements 합니다! 
 		 */
 		
-	}
-	
-	public void UserMenu() {
-		/*
-		 * 1. 게임 >> new User_Game();
-		 * 2. 사용자 정보 수정 >> new Uesr_Update();
-		 * 3. 로그아웃 >> return;
-		 * 4. 탈퇴 >> new User_Delete();
-		 * 
-		 * execute(); 함수 호출
-		 * 
-		 * new 다음은 클래스명을 의미하며 각 class 파일을 만들어주세요! 
-		 * 또한, 모든 클래스는 Member 인터페이스를 implements 합니다! 
-		 */
+		sc = new Scanner(System.in);
 		
+		while(true) {
+			
+			System.out.println("\n----------------------------- 관리자 -----------------------------\n");
+			System.out.println("\t1. 회원 목록\t2. 회원 삭제\t3. 회원 관리\n\t4. 관리자 정보 수정 \t5. 로그아웃\6. 탈퇴");
+			System.out.println("\t* 5, 6 번 선택 시, Main 메뉴로 이동합니다. \n");
+			System.out.println("------------------------------------------------------------------");
+			System.out.print("\t메뉴 선택 : ");
+			
+			num = sc.nextInt();
+			
+			if(num == 1 || num == 2) {
+				
+			}else if(num == 3) {
+				System.out.println("Main 메뉴로 돌아갑니다. \n");
+				break;
+			}
+			else System.out.println("메뉴 중에서 선택해주세요.");
+			
+		}
 	}
 	
 }
