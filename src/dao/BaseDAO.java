@@ -1,23 +1,46 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dto.MemberDTO;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BaseDAO {
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String username = "hr";
 	private String password = "hr";
 	
-	private Connection con;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-
+	protected Connection con;
+	protected PreparedStatement pstmt;
+	protected ResultSet rs;
+	
+	public BaseDAO() {
+		try {
+			Class.forName(driver); 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	// DB 연결
-	public void getConnection() {
-		System.out.println();
+	public Connection getConnection() {
+		try {
+			con = DriverManager.getConnection(url, username, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return con;
 	}
 	
 	// DB 종료 1
@@ -40,5 +63,31 @@ public class BaseDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int saveMember(MemberDTO memberDTO) {
+		int num = 0;
+		getConnection();
+		
+		String sql = "select * from member";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			System.out.println(rs.next());
+			
+//			System.out.println(rs.getString(1) + " "
+//							+ rs.getString(2) + " "
+//							+ rs.getString(3));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			closeDB(con, pstmt, rs);
+		}
+		
+		
+		return num;
 	}
 }
