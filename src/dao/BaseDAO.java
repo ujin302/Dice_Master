@@ -36,7 +36,6 @@ public class BaseDAO {
 		try {
 			con = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -50,7 +49,6 @@ public class BaseDAO {
 			if(pstmt != null) pstmt.close();
 			if(con != null) con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -76,10 +74,6 @@ public class BaseDAO {
 			rs = pstmt.executeQuery();
 			
 			System.out.println(rs.next());
-			
-//			System.out.println(rs.getString(1) + " "
-//							+ rs.getString(2) + " "
-//							+ rs.getString(3));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

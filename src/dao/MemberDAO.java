@@ -32,11 +32,11 @@ public class MemberDAO extends BaseDAO {
 		 */
 		
 		
-		sql = "insert into member values (1, 2, 3, 4, 5)";
+		sql = "insert into member values (?, ?, ?, ?, ?)";
 		
 		try {
-			con = super.getConnection(); 
-			pstmt = con.prepareStatement(sql);
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
 			
 			num = pstmt.executeUpdate();
 			
@@ -45,7 +45,7 @@ public class MemberDAO extends BaseDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			super.closeDB(con, pstmt, rs);
+			super.closeDB(con, pstmt);
 		}
 		
 		return num;
