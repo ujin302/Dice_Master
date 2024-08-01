@@ -59,6 +59,9 @@ public class MenuService {
 		 * 또한, 모든 클래스는 Member 인터페이스를 implements 합니다! 
 		 */
 		
+		/*
+		 * 입력 : 1 >> new GameMenu.gameMenu(user_id);
+		 */
 	}
 	
 }
