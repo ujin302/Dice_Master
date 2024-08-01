@@ -41,7 +41,7 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 		
 		if(role.equals(RoleService.USER)) dto.setReward(RoleService.REWARD);
 		
-		int num = memberDAO.joinMeberData(dto);
+		int num = memberDAO.joinMemberData(dto);
 		if(num == 1) System.out.println(role + " 회원가입 성공하였습니다.");
 		else System.out.println(role + " 회원가입 실패하였습니다.");
 		
