@@ -63,7 +63,7 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
         if (dto != null) {
             System.out.println("환영합니다. " + dto.getUser_Name() + "님, " + role + "로그인에 성공하였습니다.");
             // 각자 메뉴 이동
-			if(role.equals(RoleService.USER)) new MenuService().userMenu();  // 사용자 메뉴
+			if(role.equals(RoleService.USER)) new MenuService().userMenu(dto.getUser_ID());  // 사용자 메뉴
 			else new MenuService().adminMenu(); // 관리자 메뉴
         } else {
             System.out.println(role + " 로그인 실패하였습니다. Main 메뉴로 돌아갑니다.");
