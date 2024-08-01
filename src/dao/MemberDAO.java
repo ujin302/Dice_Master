@@ -81,7 +81,7 @@ public class MemberDAO extends BaseDAO {
 								);
 			}
 			
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			e.printStackTrace();
 		} finally {
 			super.closeDB(con, pstmt, rs);
@@ -89,7 +89,7 @@ public class MemberDAO extends BaseDAO {
 		
 		return dto;
 	}
-
+		
 	// 사용자 & 관리자 탈퇴
 	public int deleteMember(String userID, String userPW) {
 		int num = 0;
