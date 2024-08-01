@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Scanner;
+
 import service.user.*;
 import service.admin.*;
 
@@ -197,5 +198,82 @@ public class MenuService {
 			System.out.println();
 		}
 	}
+	public void gameMenu() {
+		Game game = null;
+		try {
+			Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+		}
+		String[] d = {
+	            "  _____  ",
+	            " |  __ \\ ",
+	            " | |  | |",
+	            " | |  | |",
+	            " | |__| |",
+	            " |_____/ "
+	    };
+
+	    String[] i = {
+	            "  _____  ",
+	            " |_   _| ",
+	            "   | |   ",
+	            "   | |   ",
+	            "  _| |_  ",
+	            " |_____| "
+	    };
 	
+	    String[] c = {
+	            "   _____ ",
+	            "  / ____|",
+	            " | |     ",
+	            " | |     ",
+	            " | |____ ",
+	            "  \\_____|"
+	    };
+	
+	    String[] e = {
+	            "  ______ ",
+	            " |  ____|",
+	            " | |__   ",
+	            " |  __|  ",
+	            " | |____ ",
+	            " |______|"
+	    };
+
+	    for (int line = 0; line < d.length; line++) {
+	    	System.out.println(d[line] + " " + i[line] + " " + c[line] + " " + e[line]);
+	    	sleep(300);
+	    	}
+		System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
+		
+		Scanner scanner = new Scanner(System.in);
+		while(true) {
+			System.out.println("[1] Big, Small");
+			System.out.println("[2] User Info");
+			System.out.println("[3] Rangking");
+			System.out.println("[4] 이전 화면으로");
+			System.out.println();
+			System.out.println("---------------------------------------");
+			System.out.print("원하는 메뉴를 선택해 주세요 : ");
+			num = scanner.nextInt();
+			if(num == 4) {
+				break;
+			}if (num == 1) {
+				new BigSamllGameService().bigsmall(); // new GameBigSmall().bigsmall(user_id);
+			}else if (num == 2){
+				
+			}
+			game.execute();
+		}
+
+	}
+	private void sleep(int milliseconds) {
+		try {
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }
