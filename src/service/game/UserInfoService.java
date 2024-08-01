@@ -3,10 +3,18 @@ package service.game;
 import service.Game;
 
 public class UserInfoService implements Game {
+	private String NickName;
+	private int reward;
+	
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-
+		
 	}
+	
+	public void UserInfo() {
+		
+	}
+	
+	
 }
