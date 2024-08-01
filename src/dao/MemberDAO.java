@@ -26,7 +26,7 @@ public class MemberDAO extends BaseDAO {
 	}
 	
 	// 사용자 & 관리자 회원가입
-	public int joinMemerData(MemberDTO memberDTO) {
+	public int joinMeberData(MemberDTO memberDTO) {
 		int num = 0;
 		/*
 		 * con 변수는 부모 클래스인 BaseDAO 변수이다. 
@@ -59,7 +59,7 @@ public class MemberDAO extends BaseDAO {
 	// 사용자 & 관리자 로그인
 	public MemberDTO loginMember(String userID, String userPW) {
 		MemberDTO dto = null;
-		sql = "select * from member where uesr_id = ?, uesr_pw =?";
+		sql = "select * from member where user_id = ?, user_pw =?";
 		
 		try {
 			super.con = super.getConnection(); 
@@ -94,7 +94,7 @@ public class MemberDAO extends BaseDAO {
 	public int deleteMember(String userID, String userPW) {
 		int num = 0;
 
-		sql = "delete from member where uesr_id = ?, uesr_pw =?";
+		sql = "delete from member where user_id = ?, user_pw =?";
 		
 		try {
 			super.con = super.getConnection(); 
@@ -118,7 +118,7 @@ public class MemberDAO extends BaseDAO {
 	public int deleteUser(String userID) {
 		int num = 0;
 
-		sql = "delete from member where uesr_id = ?";
+		sql = "delete from member where user_id = ?";
 		
 		try {
 			super.con = super.getConnection(); 
