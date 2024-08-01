@@ -1,6 +1,21 @@
-package service;
+package service.game;
+
+import java.util.Random;
+import java.util.Scanner;
+
+import service.Game;
 
 public class BigSamllGameService implements Game{
+	private Scanner scanner;
+	private Random random;
+	//private GameHistoryDao historyDAO;
+	
+	public BigSamllGameService() {
+		scanner = new Scanner(System.in);
+		random = new Random();
+		
+		return;
+	}
 	@Override
 	public void execute() {
 		String[] b = {
@@ -75,6 +90,9 @@ public class BigSamllGameService implements Game{
         }
         System.out.println("---------------------------------------");
 		System.out.println("---------------------------------------");
+		
+		System.out.println("주사위 게임을 시작합니다!");
+		
 		
 		
         /*
