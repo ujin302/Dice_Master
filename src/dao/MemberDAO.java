@@ -180,7 +180,7 @@ public class MemberDAO extends BaseDAO {
 	public int controlUser(int standard) {
 		int num = 0;
 
-		sql = "delete from member where reward = ?";
+		sql = "delete from member where reward > ?";
 		
 		try {
 			super.con = super.getConnection(); 
