@@ -26,10 +26,6 @@ public class MemberDTO {
 	 * reward
 	 */
 	
-	public MemberDTO(String user_name) {
-		this.user_Name = user_name;
-	}
-	
 	public String userPrint () {
 		return user_Name + "\t"
 				+ user_ID + "\t"

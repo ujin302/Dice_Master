@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import dto.GameHistoryDTO;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -21,5 +25,41 @@ public class GameHistoryDAO extends BaseDAO{
 		return instance;
 	}
 	//게임 시작 시 user_id, nickname, time_start
-	
+	public int saveGameHistory(GameHistoryDTO gameHistoryDTO) {
+		int num = 0;
+		
+		Connection con = super.getConnection();
+		
+		
+		return num;
+		
+	}
+	public GameHistoryDTO findId(String id) {
+		GameHistoryDTO ghsDTO = null;
+		sql = "select * from member where user_id = ?";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				ghsDTO = new GameHistoryDTO(rs.getString("user_id"),
+						rs.getString("nikname"),
+						rs.getString("reward"),
+						rs.getString("game_start"),
+						rs.getString("game_over"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return ghsDTO;
+	}
 }
