@@ -1,9 +1,24 @@
-package service;
+package service.game;
 
-public class BigSamllGameService {
-	   
-	public void bigsmall() {
-        String[] b = {
+import java.util.Random;
+import java.util.Scanner;
+
+import service.Game;
+
+public class BigSamllGameService implements Game{
+	private Scanner scanner;
+	private Random random;
+	//private GameHistoryDao historyDAO;
+	
+	public BigSamllGameService() {
+		scanner = new Scanner(System.in);
+		random = new Random();
+		
+		return;
+	}
+	@Override
+	public void execute() {
+		String[] b = {
                 "  ____   ",
                 " |  _ \\  ",
                 " | |_) | ",
@@ -73,7 +88,13 @@ public class BigSamllGameService {
             		           + m[line] + " " + a[line] + " " 
                                + l[line] + " " + l[line]);
         }
-        
+        System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
+		
+		System.out.println("주사위 게임을 시작합니다!");
+		
+		
+		
         /*
          * 승부가 났을 때, DB (game) 저장 
          * 

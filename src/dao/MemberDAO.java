@@ -26,7 +26,7 @@ public class MemberDAO extends BaseDAO {
 	}
 	
 	// 사용자 & 관리자 회원가입
-	public int joinMeberData(MemberDTO memberDTO) {
+	public int joinMemberData(MemberDTO memberDTO) {
 		int num = 0;
 		/*
 		 * con 변수는 부모 클래스인 BaseDAO 변수이다. 

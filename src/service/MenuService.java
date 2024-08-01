@@ -1,9 +1,11 @@
 package service;
 
 import java.util.Scanner;
-
 import service.user.*;
 import service.admin.*;
+import service.game.BigSamllGameService;
+import service.game.RangkingService;
+import service.game.UserInfoService;
 
 public class MenuService {
 	Scanner sc;
@@ -199,6 +201,7 @@ public class MenuService {
 			System.out.println();
 		}
 	}
+
 	public void gameMenu(String uesr_id) {
 		Game game = null;
 		try {
@@ -259,17 +262,30 @@ public class MenuService {
 			System.out.println("---------------------------------------");
 			System.out.print("원하는 메뉴를 선택해 주세요 : ");
 			num = scanner.nextInt();
-			if(num == 4) {
+			
+			if(num == 1) {
+				game = new BigSamllGameService();
+			} else if(num == 2) {
+				game = new UserInfoService();
+			} else if(num == 3) {
+				game = new RangkingService();
+			} else if(num == 4) {
+				System.out.println("");
 				break;
-			}if (num == 1) {
-				new BigSamllGameService().bigsmall(); // new GameBigSmall().bigsmall(user_id);
-			}else if (num == 2){
-				
 			}
+				
+				
+				
+//			} else if (num == ) {
+//				new BigSamllGameService(); // new GameBigSmall().bigsmall(user_id);
+//			}else if (num == 2){
+//				
+//			}
 			game.execute();
 		}
 
 	}
+	
 	private void sleep(int milliseconds) {
 		try {
 			Thread.sleep(milliseconds);
