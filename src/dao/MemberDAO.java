@@ -59,20 +59,18 @@ public class MemberDAO extends BaseDAO {
 	// 사용자 & 관리자 로그인
 	public MemberDTO loginMember(String userID, String userPW) {
 		MemberDTO dto = null;
-		sql = "select * from member where user_id = ? and user_pw =?";
-
+		sql = "select * from member where user_id = ?, user_pw =?";
 		
-		try { // ? 
-			super.con = super.getConnection(); // 드라이버 연결한 데이터 저장 
-			super.pstmt = con.prepareStatement(sql); // sql 컴파일 
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, userID); // id = ? 데이터 매핑
+			pstmt.setString(1, userID);
 			pstmt.setString(2, userPW);
 			
-			rs = pstmt.executeQuery(); // sql 실행 & rs에 결과값 저장 
+			rs = pstmt.executeQuery();
 			
-			while(rs.next()) { // rs 다음꺼 들고오기 있으면 T, 없으면 F
-				// 다음꺼 정보 저장 
+			while(rs.next()) {
 				dto = new MemberDTO(
 									rs.getString("user_Name"),
 									rs.getString("user_ID"),
@@ -83,20 +81,13 @@ public class MemberDAO extends BaseDAO {
 								);
 			}
 			
-<<<<<<< HEAD
 		} catch (SQLException e) { 
 			e.printStackTrace();
-=======
-		} catch (SQLException e) {
-			e.printStackTrace(); // e 변수에 try 예외 정보 전달. 빨간줄 출력 
->>>>>>> dcc2964550d80025d89c6481a16372a321047ec0
 		} finally {
-			super.closeDB(con, pstmt, rs); // 편하게 가져다 쓰기 위해서 함수 호출 
+			super.closeDB(con, pstmt, rs);
 		}
 		
-		
-		return dto; 
-		
+		return dto;
 	}
 		
 	// 사용자 & 관리자 탈퇴
