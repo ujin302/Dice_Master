@@ -8,3 +8,11 @@ create TABLE member(
  reward number(6,0)
 );
 
+create Tabel game(
+ user_id varchar2(15) not null,
+ nickname varchar2(30) not null,
+ reward number(6,0),
+ time_start TIMESTAMP,
+ time_over TIMESTAMP);
+ 
+ 
