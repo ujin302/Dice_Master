@@ -59,7 +59,7 @@ public class MemberDAO extends BaseDAO {
 	// 사용자 & 관리자 로그인
 	public MemberDTO loginMember(String userID, String userPW) {
 		MemberDTO dto = null;
-		sql = "select * from member where user_id = ?, user_pw =?";
+		sql = "select * from member where user_id = ? and user_pw =?";
 
 		
 		try { // ? 
@@ -98,7 +98,7 @@ public class MemberDAO extends BaseDAO {
 	public int deleteMember(String userID, String userPW) {
 		int num = 0;
 
-		sql = "delete from member where user_id = ?, user_pw =?";
+		sql = "delete from member where user_id = ? and user_pw =?";
 		
 		try {
 			super.con = super.getConnection(); 

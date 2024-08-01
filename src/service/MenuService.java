@@ -62,6 +62,7 @@ public class MenuService {
 			
 			if(num == 1 || num == 2) {
 				new MemberService(num).joinMembership();
+				break;
 			}else if(num == 3) {
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
 				break;
@@ -104,7 +105,7 @@ public class MenuService {
 		}
 	}
 	
-	public void userMenu() {
+	public void userMenu(String uesr_id) {
 		/*
 		 * 1. 게임 >> new User_Game();
 		 * 2. 사용자 정보 수정 >> new Uesr_Update();
@@ -130,7 +131,7 @@ public class MenuService {
 			num = sc.nextInt();
 			
 			if(num == 1) {
-				// 게임 메뉴 함수 호출
+				gameMenu(uesr_id);
 			}else if(num == 2) {
 				member = new Uesr_UpdateService();
 			}
@@ -169,7 +170,7 @@ public class MenuService {
 		while(true) {
 			
 			System.out.println("\n----------------------------- 관리자 -----------------------------\n");
-			System.out.println("\t1. 회원 목록\t2. 회원 삭제\t3. 회원 관리\n\t4. 관리자 정보 수정 \t5. 로그아웃\6. 탈퇴");
+			System.out.println("\t1. 회원 목록\t2. 회원 삭제\t3. 회원 관리\n\t4. 관리자 정보 수정 \t5. 로그아웃\t6. 탈퇴");
 			System.out.println("\t* 5, 6 번 선택 시, Main 메뉴로 이동합니다. \n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
@@ -198,7 +199,7 @@ public class MenuService {
 			System.out.println();
 		}
 	}
-	public void gameMenu() {
+	public void gameMenu(String uesr_id) {
 		Game game = null;
 		try {
 			Thread.sleep(100);
