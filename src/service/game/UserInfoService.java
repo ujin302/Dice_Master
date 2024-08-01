@@ -6,15 +6,10 @@ public class UserInfoService implements Game {
 	private String NickName;
 	private int reward;
 	
-
 	@Override
-	public void execute() {
-		
+	public void execute(String uesr_id) {
+		// TODO Auto-generated method stub
+
+	
 	}
-	
-	public void UserInfo() {
-		
-	}
-	
-	
 }

@@ -17,7 +17,7 @@ public class BigSamllGameService implements Game{
 		return;
 	}
 	@Override
-	public void execute() {
+	public void execute(String uesr_id) {
 		String[] b = {
                 "  ____   ",
                 " |  _ \\  ",
