@@ -26,10 +26,15 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 
 	// 사용자 & 관리자 회원가입
 	public void joinMembership() {
+		String input = null;
 		dto = new MemberDTO();
 		
 		System.out.println("안녕하세요. " + role + " 회원 가입을 위해 아래 정보를 작성해주세요.");
 		System.out.print("사용자 이름 : ");
+		input = sc.next();
+		boolean isExist = memberDAO.findId(input);
+		if(isExist) 
+		
 		dto.setUser_Name(sc.next());
 		System.out.print("사용자 아이디 : ");
 		dto.setUser_ID(sc.next());
@@ -41,7 +46,7 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 		
 		if(role.equals(RoleService.USER)) dto.setReward(RoleService.REWARD);
 		
-		int num = memberDAO.joinMeberData(dto);
+		int num = memberDAO.joinMemberData(dto);
 		if(num == 1) System.out.println(role + " 회원가입 성공하였습니다.");
 		else System.out.println(role + " 회원가입 실패하였습니다.");
 		
