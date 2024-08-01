@@ -261,7 +261,7 @@ public class MenuService {
 			if(num == 4) {
 				break;
 			}if (num == 1) {
-				new BigSamllGameService().bigsmall(); // new GameBigSmall().bigsmall(user_id);
+				new BigSamllGameService(); // new GameBigSmall().bigsmall(user_id);
 			}else if (num == 2){
 				
 			}

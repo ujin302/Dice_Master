@@ -1,9 +1,9 @@
 package service;
 
-public class BigSamllGameService {
-	   
-	public void bigsmall() {
-        String[] b = {
+public class BigSamllGameService implements Game{
+	@Override
+	public void execute() {
+		String[] b = {
                 "  ____   ",
                 " |  _ \\  ",
                 " | |_) | ",
@@ -73,7 +73,10 @@ public class BigSamllGameService {
             		           + m[line] + " " + a[line] + " " 
                                + l[line] + " " + l[line]);
         }
-        
+        System.out.println("---------------------------------------");
+		System.out.println("---------------------------------------");
+		
+		
         /*
          * 승부가 났을 때, DB (game) 저장 
          * 
