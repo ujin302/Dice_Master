@@ -109,7 +109,7 @@ public class MenuService {
 		}
 	}
 	
-	public void userMenu(String uesr_id) {
+	public void userMenu(String user_id) {
 		/*
 		 * 1. 게임 >> new User_Game();
 		 * 2. 사용자 정보 수정 >> new Uesr_Update();
@@ -135,7 +135,7 @@ public class MenuService {
 			num = sc.nextInt();
 			
 			if(num == 1) {
-				gameMenu(uesr_id);
+				gameMenu(user_id);
 			}else if(num == 2) {
 				member = new Uesr_UpdateService();
 			}
