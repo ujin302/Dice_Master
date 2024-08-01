@@ -1,4 +1,6 @@
-package service;
+package service.game;
+
+import service.Game;
 
 public class RangkingService implements Game {
 
