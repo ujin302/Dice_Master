@@ -1,6 +1,8 @@
 package service;
 
 import java.util.Scanner;
+
+import dto.MemberDTO;
 import service.user.*;
 import service.admin.*;
 import service.game.BigSamllGameService;
@@ -203,6 +205,7 @@ public class MenuService {
 	}
 
 	public void gameMenu(String uesr_id) {
+		
 		Game game = null;
 		try {
 			Thread.sleep(100);
