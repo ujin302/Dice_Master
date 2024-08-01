@@ -6,55 +6,147 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dto.MemberDTO;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor 
 public class MemberDAO extends BaseDAO {
-	//MemberDAO의 싱글톤 인스턴스 생성
-	static MemberDAO instance = new MemberDAO();
+	private static MemberDAO instance;
+	String sql;
+	
+	public static MemberDAO getInstance() {
+		if(instance == null) {
+			synchronized (MemberDAO.class) {
+				instance = new MemberDAO();
+			}
+		}
+		
+		return instance;
+	}
 	
 	// 회원정보 저장
 	public int saveMember(MemberDTO memberDTO) {
-		int num = 0; //결과 저장변수
-		getConnection(); //DB연결 
-		PreparedStatement pstmt = null; //쿼리실행
-
-		return num; //반환
-	}
-	//회원 로그인
-	public int loginMember(String userID, String userPW) {
-		int result = 0;
-		getConnection();
-		PreparedStatement pstmt = null;
-		
-		return result;
-		
-	}
-	
-	// 회원정보 저장, 매개변수 : id, pw, num(1 or 2)
-	public int loginMember() {
 		int num = 0;
-		getConnection();
+		/*
+		 * con 변수는 부모 클래스인 BaseDAO 변수이다. 
+		 * 따라서 MemberDAO에서 con를 초기화해줘야 한다. 
+		 */
+		
+		
+		sql = "insert into member values (?, ?, ?, ?, ?)";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			num = pstmt.executeUpdate();
+			
+			System.out.println(num);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+		}
 		
 		return num;
 	}
-	// ID로 회원정보 조회
-	public MemberDTO getMember(String id) {
-		MemberDTO memberDTO = null; //조회된 회원정보 저장
-		getConnection();
-		PreparedStatement pstmt = null;
+	
+	// 회원정보 저장, 매개변수 : id, pw, num(1 or 2)
+	public int loginMember(String id, String pw) {
+		int num = 0;
+		sql = "select * from member where user_id =?, user_pw=?";
+		
+		try {
+			super.con = super.getConnection();
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			
+			num = pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+	}
+			
+		return num;
+	}
 
-		return memberDTO;
+	public boolean findId(String id) {
+		boolean exist = false;
+		sql = "select * from member where user_id = ?";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return true;
+	}
+	//관리자 정보 수정
+	public int updateAdmin(MemberDTO memberDTO) {
+		int exist = 0;
+		
+		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		
+		try {
+			super.con = super.getConnection();
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberDTO.getUser_Name());
+			pstmt.setString(2, memberDTO.getUser_PW());
+			pstmt.setString(3, memberDTO.getUser_Email());
+			pstmt.setString(4, memberDTO.getUser_ID());
+			
+			exist = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+		}
+		
+		return exist;
 		
 	}
-	//회원정보 수정
-	public int updateMember(MemberDTO memberDTO) {
+	//사용자 정보 수정
+	public int updateUser(MemberDTO memberDTO) {
 		int result = 0;
-		getConnection();
-		PreparedStatement pstmt = null;
-
+		
+		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		
+		try {
+			super.con = super.getConnection();
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberDTO.getUser_Name());
+			pstmt.setString(2, memberDTO.getUser_PW());
+			pstmt.setString(3, memberDTO.getUser_Email());
+			pstmt.setString(4, memberDTO.getUser_ID());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+		}
 		
 		return result;
-		
 	}
-	
-	
 }
