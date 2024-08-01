@@ -26,7 +26,7 @@ public class MemberDAO extends BaseDAO {
 	}
 	
 	// 사용자 & 관리자 회원가입
-	public int joinMemerData(MemberDTO memberDTO) {
+	public int joinMeberData(MemberDTO memberDTO) {
 		int num = 0;
 		/*
 		 * con 변수는 부모 클래스인 BaseDAO 변수이다. 
@@ -37,7 +37,7 @@ public class MemberDAO extends BaseDAO {
 		try {
 			super.con = super.getConnection(); 
 			super.pstmt = con.prepareStatement(sql);
-			
+		
 			pstmt.setString(1, memberDTO.getUser_Name());
 			pstmt.setString(2, memberDTO.getUser_ID());
 			pstmt.setString(3, memberDTO.getUser_PW());
@@ -55,8 +55,9 @@ public class MemberDAO extends BaseDAO {
 		
 		return num;
 	}
-	
+
 	// 사용자 & 관리자 로그인
+<<<<<<< HEAD
 	public MemberDTO loginMember(String userID, String userPW) { // 매개변수 ID, PW 
 		/*
 		 * loginMember() 함수 사용 이유 : member(T)에서 id와 pw가 일치하는 한 행을 가져오겠다. 
@@ -81,6 +82,11 @@ public class MemberDAO extends BaseDAO {
 		 * 	로그인 실패 의미 
 		 * 
 		 */
+=======
+	public MemberDTO loginMember(String userID, String userPW) {
+		MemberDTO dto = null;
+		sql = "select * from member where user_id = ?, user_pw =?";
+>>>>>>> a6b49b1e965344ca92351391df802774f810d51a
 		
 		MemberDTO dto = null; // ? 반환 시, 사용하는 DTO 
 		sql = "select * from member where uesr_id = ?, uesr_pw =?"; // ? 
@@ -121,7 +127,7 @@ public class MemberDAO extends BaseDAO {
 	public int deleteMember(String userID, String userPW) {
 		int num = 0;
 
-		sql = "delete from member where uesr_id = ?, uesr_pw =?";
+		sql = "delete from member where user_id = ?, user_pw =?";
 		
 		try {
 			super.con = super.getConnection(); 
@@ -145,7 +151,7 @@ public class MemberDAO extends BaseDAO {
 	public int deleteUser(String userID) {
 		int num = 0;
 
-		sql = "delete from member where uesr_id = ?";
+		sql = "delete from member where user_id = ?";
 		
 		try {
 			super.con = super.getConnection(); 
@@ -189,8 +195,8 @@ public class MemberDAO extends BaseDAO {
 										);
 				
 				dtoList.add(dto);
-			}
-			
+			}	
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -199,7 +205,7 @@ public class MemberDAO extends BaseDAO {
 		
 		return dtoList;
 	}
-
+	
 	public int controlUser(int standard) {
 		int num = 0;
 
@@ -219,7 +225,82 @@ public class MemberDAO extends BaseDAO {
 			super.closeDB(con, pstmt);
 		}
 		
-		return num;
+		return num;		
+	}
+	
+	public int updateAdmin(MemberDTO memberDTO) {
+		int exist = 0;
+		
+		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		
+		try {
+			super.con = super.getConnection();
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberDTO.getUser_Name());
+			pstmt.setString(2, memberDTO.getUser_PW());
+			pstmt.setString(3, memberDTO.getUser_Email());
+			pstmt.setString(4, memberDTO.getUser_ID());
+			
+			exist = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+		}
+		
+		return exist;
+		
+	}
+
+	//사용자 정보 수정
+	public int updateUser(MemberDTO memberDTO) {
+		int result = 0;
+		
+		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		
+		try {
+			super.con = super.getConnection();
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memberDTO.getUser_Name());
+			pstmt.setString(2, memberDTO.getUser_PW());
+			pstmt.setString(3, memberDTO.getUser_Email());
+			pstmt.setString(4, memberDTO.getUser_ID());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt);
+		}
+		
+		return result;
+	}
+	
+	public boolean findId(String id) {
+		boolean exist = false;
+		sql = "select * from member where user_id = ?";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return exist;
 	}
 	
 }
