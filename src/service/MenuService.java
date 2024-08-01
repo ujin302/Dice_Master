@@ -276,15 +276,8 @@ public class MenuService {
 				System.out.println("");
 				break;
 			}
-				
-				
-				
-//			} else if (num == ) {
-//				new BigSamllGameService(); // new GameBigSmall().bigsmall(user_id);
-//			}else if (num == 2){
-//				
-//			}
-			game.execute();
+			
+			game.execute(uesr_id);
 		}
 
 	}
