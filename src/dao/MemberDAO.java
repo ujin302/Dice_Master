@@ -274,4 +274,50 @@ public class MemberDAO extends BaseDAO {
 		return exist;
 	}
 	
+	public boolean findName(String user_name) {
+		boolean exist = false;
+		sql = "select * from member where user_name = ?";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, user_name);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return exist;
+	}
+	
+	public boolean findEmail(String user_email) {
+		boolean exist = false;
+		sql = "select * from member where user_email = ?";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, user_email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) exist = true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return exist;
+	}
+	
 }
