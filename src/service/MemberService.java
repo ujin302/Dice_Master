@@ -1,90 +1,87 @@
 package service;
 
 import java.util.Scanner;
+
 import dao.MemberDAO;
 import dto.MemberDTO;
+import service.*;
 
-public class MemberService {
-    // 사용자 & 관리자 공통 부분 처리 
-    MemberDAO memberDAO = new MemberDAO(); //객체생성
-    Scanner scan = new Scanner(System.in);
-
-    // 사용자 & 관리자 회원가입
-    public void joinMembership(int num) {
-        MemberDTO memberDTO = new MemberDTO(); //회원정보 저장 객체
-        System.out.println("회원가입 정보를 입력해주세요.");
-        System.out.print("사용자 이름 : ");
-        memberDTO.setUser_Name(scan.next());
-        System.out.print("아이디 : ");
-        memberDTO.setUser_ID(scan.next());
-        System.out.print("비밀번호 : ");
-        memberDTO.setUser_PW(scan.next());
-        System.out.print("이메일 : ");
-        memberDTO.setUser_Email(scan.next());
-        
-        memberDTO.setRole(num == 1 ? "USER" : "ADMIN"); //사용자/관리자 각자 role 설정
-        
-        //회원정보 DB에 저장, 결과반환
-        int result = memberDAO.saveMember(memberDTO);
-        if (result > 0) { //저장성공 시
-            System.out.println("회원가입 성공");
-            login(num);
-        } else {
-            System.out.println("회원가입 실패");
-        }
-    }
-    
-    // 사용자 & 관리자 로그인
-    public void login(int num) {
-        System.out.println("로그인 정보를 입력해주세요.");
-        System.out.print("아이디 : ");
-        String userID = scan.next();
-        System.out.print("비밀번호 : ");
-        String userPW = scan.next();
-
-        //입력한 로그인정보를 DB에서 확인, 결과반환
-        int result = memberDAO.loginMember(userID, userPW);
-        if (result > 0) {
-            System.out.println("로그인 성공");
-            if (num == 1) {
-                new MenuService().UserMenu(); //1인경우 사용자 -> User메뉴
-            } else {
-                new MenuService().AdminMenu(); //관리자
-            }
-        } else {
-            System.out.println("로그인 실패");
-        }
-    }
-
-
-//사용자 & 관리자 공통 부분 처리 
+public class MemberService { // 사용자 & 관리자 공통 부분 처리
+	MemberDAO memberDAO;
+	MemberDTO dto;
+	String role;
+	Scanner sc;
+	
+	
+	public MemberService(int num) {
+		if(num == 1) {
+			role = RoleService.USER;
+		} else if(num == 2) {
+			role = RoleService.ADMIN;
+		}
+		
+		memberDAO = MemberDAO.getInstance();
+		sc = new Scanner(System.in);
+	}
 
 	// 사용자 & 관리자 회원가입
-	//public void joinMembership(int num) {
-		/*
-		 * 사용자 : 무제한 & num == 1
-		 * 관리자 : 인원 제한 3명 & num == 2
-		 * 
-		 * [ 사용자 입력 ] 
-		 * UserName 
-		 * ID
-		 * PW 
-		 * Email 
-		 * 
-		 * PW 제외 중복 X 
-		 * 
-		 * 회원가입 후, 로그인 화면 이동 >> login(); 호출
-		 */
-	
+	public void joinMembership() {
+		dto = new MemberDTO();
+		
+		System.out.println("안녕하세요. " + role + " 회원 가입을 위해 아래 정보를 작성해주세요.");
+		System.out.print("사용자 이름 : ");
+		dto.setUser_Name(sc.next());
+		System.out.print("사용자 아이디 : ");
+		dto.setUser_ID(sc.next());
+		System.out.print("사용자 비밀번호 : ");
+		dto.setUser_PW(sc.next());
+		System.out.print("사용자 이메일 : ");
+		dto.setUser_Email(sc.next());
+		dto.setRole(role);
+		
+		if(role.equals(RoleService.USER)) dto.setReward(RoleService.REWARD);
+		
+		int num = memberDAO.joinMemerData(dto);
+		if(num == 1) System.out.println(role + " 회원가입 성공하였습니다.");
+		else System.out.println(role + " 회원가입 실패하였습니다.");
+		
+		System.out.println("");
+		
+		
+	}
 	
 	// 사용자 & 관리자 로그인
-	//public void login(int num) {
-		/*
-		 * 사용자 : num == 1
-		 * 관리자 : num == 2
-		 * 
-		 * [ 사용자 입력 ] 
-		 * ID
-		 * PW 
-		 */
+	public void login() {
+		System.out.println("안녕하세요. " + role + " 로그인 정보를 입력해주세요.");
+        System.out.print("아이디 : ");
+        String userID = sc.next();
+        System.out.print("비밀번호 : ");
+        String userPW = sc.next();
+
+        // 로그인 확인 
+        dto = memberDAO.loginMember(userID, userPW);
+        if (dto != null) {
+            System.out.println("환영합니다. " + dto.getUser_Name() + "님, " + role + "로그인에 성공하였습니다.");
+            // 각자 메뉴 이동
+			if(role.equals(RoleService.USER)) new MenuService().userMenu();  // 사용자 메뉴
+			else new MenuService().adminMenu(); // 관리자 메뉴
+        } else {
+            System.out.println(role + " 로그인 실패하였습니다. Main 메뉴로 돌아갑니다.");
+        }
 	}
+	
+	// 사용자 & 관리자 탈퇴
+	public void delete() {
+		System.out.println("Dice Master 프로그램 탈퇴를 위해 " + role + " 정보를 입력해주세요.");
+        System.out.print("아이디 : ");
+        String userID = sc.next();
+        System.out.print("비밀번호 : ");
+        String userPW = sc.next();
+        
+        int result = memberDAO.deleteMember(userID, userPW);
+        
+        if(result == 1) System.out.println("성공적으로 탈퇴하였습니다. ");
+        else System.out.println("정보가 알맞지 않아 탈퇴에 실패하였습니다. ");
+	
+	}
+}

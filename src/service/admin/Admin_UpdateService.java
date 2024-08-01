@@ -5,7 +5,7 @@ import dto.MemberDTO;
 import dao.MemberDAO;
 import service.Member;
 
-public class Admin_Update implements Member {
+public class Admin_UpdateService implements Member {
    
 	// 관리자 정보 수정
     @Override
@@ -16,8 +16,6 @@ public class Admin_Update implements Member {
     	Scanner scan = new Scanner(System.in);
     	
         System.out.println("관리자 정보를 수정합니다.");
-
-        
         System.out.print("수정할 관리자 ID를 입력하세요 : ");
         String id = scan.next();
         
@@ -55,14 +53,3 @@ public class Admin_Update implements Member {
     
     }
 }
-        //입력한 정보로 관리자 정보수정
-        
-
-/*
- 4. 관리자 정보 수정 
-	@Override
-	public void execute() {
-		
-	}
-}
-*/

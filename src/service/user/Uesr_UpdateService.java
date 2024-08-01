@@ -1,12 +1,13 @@
 package service.user;
 
 import java.util.Scanner;
-import dto.MemberDTO;
+
 import dao.MemberDAO;
+import dto.MemberDTO;
 import service.Member;
 
-public class Uesr_Update implements Member {
-    
+public class Uesr_UpdateService implements Member {
+	
 	// 사용자 정보 수정
     @Override
     public void execute() {
@@ -52,13 +53,4 @@ public class Uesr_Update implements Member {
         
     }
 }
-/*
-3. 사용자 정보 수정 
-      @Override
-	  public void execute() {
-			
-		}
-		
-}
 
-*/
