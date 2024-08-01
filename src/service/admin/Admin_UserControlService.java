@@ -10,7 +10,7 @@ public class Admin_UserControlService implements Member {
 	@Override
 	public void execute() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("제거하고 싶은 상금 기준을 입력해주세요. ");
+		System.out.println("제거하고 싶은 기준 코인을 입력해주세요. ");
 		System.out.print("입력 : ");
 		int standard = sc.nextInt();
 		
