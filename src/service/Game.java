@@ -1,5 +1,5 @@
 package service;
 
 public interface Game {
-	public abstract void execute(String uesr_id);
+	public abstract void execute(String user_id);
 }

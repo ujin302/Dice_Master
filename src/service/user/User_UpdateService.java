@@ -6,7 +6,7 @@ import dao.MemberDAO;
 import dto.MemberDTO;
 import service.Member;
 
-public class Uesr_UpdateService implements Member {
+public class User_UpdateService implements Member {
 	
 	// 사용자 정보 수정
     @Override

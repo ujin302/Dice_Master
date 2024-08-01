@@ -109,10 +109,10 @@ public class MenuService {
 		}
 	}
 	
-	public void userMenu(String uesr_id) {
+	public void userMenu(String user_id) {
 		/*
 		 * 1. 게임 >> new User_Game();
-		 * 2. 사용자 정보 수정 >> new Uesr_Update();
+		 * 2. 사용자 정보 수정 >> new user_Update();
 		 * 3. 로그아웃 >> return;
 		 * 4. 탈퇴 >> new User_Delete();
 		 * 
@@ -135,9 +135,9 @@ public class MenuService {
 			num = sc.nextInt();
 			
 			if(num == 1) {
-				gameMenu(uesr_id);
+				gameMenu(user_id);
 			}else if(num == 2) {
-				member = new Uesr_UpdateService();
+				member = new User_UpdateService();
 			}
 			else if(num == 3 || num == 4) {
 				if(num == 3) System.out.print("로그아웃 되었습니다. ");
@@ -204,7 +204,7 @@ public class MenuService {
 		}
 	}
 
-	public void gameMenu(String uesr_id) {
+	public void gameMenu(String user_id) {
 		
 		Game game = null;
 		try {
@@ -267,7 +267,7 @@ public class MenuService {
 			num = scanner.nextInt();
 			
 			if(num == 1) {
-				game = new BigSamllGameService();
+//				game = new BigSamllGameService();
 			} else if(num == 2) {
 				game = new UserInfoService();
 			} else if(num == 3) {
@@ -277,7 +277,7 @@ public class MenuService {
 				break;
 			}
 			
-			game.execute(uesr_id);
+			game.execute(user_id);
 		}
 
 	}

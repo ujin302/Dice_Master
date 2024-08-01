@@ -2,9 +2,12 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import dto.GameHistoryDTO;
 import lombok.NoArgsConstructor;
+import service.RoleService;
 
 @NoArgsConstructor
 public class GameHistoryDAO extends BaseDAO{
@@ -61,5 +64,61 @@ public class GameHistoryDAO extends BaseDAO{
 		}
 		
 		return ghsDTO;
+	}
+	
+	public ArrayList<String> getNicknameList() { // member.User_Id 추출 
+		ArrayList<String> nicknameList = new ArrayList<String>();
+		
+		sql = "select user_name from member";
+		
+		try {
+			super.con = super.getConnection(); 
+			super.pstmt = con.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				nicknameList.add(rs.getString("user_id"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return nicknameList;
+	}
+	
+	public PriorityQueue<String[]> getRank() {
+		ArrayList<String> nicknameList = getNicknameList();
+		PriorityQueue<String[]> rankQueue = new PriorityQueue<String[]>(); // nickname, 최고 보상 
+		
+		sql = "select * from gamehistory where nikname = ? order by reward desc"; // 보상 기준 내림차순
+		
+		try {
+			super.con = super.getConnection(); 
+			
+			for(String n : nicknameList) {
+				String[] data = new String[2];
+				super.pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, n);
+
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) { // 사용자의 게임 정보가 있을 경우에만 실행
+					data[0] = n;
+					data[1] = rs.getInt("reward")+"";
+					
+					rankQueue.add(data);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			super.closeDB(con, pstmt, rs);
+		}
+		
+		return rankQueue;
 	}
 }
