@@ -57,39 +57,10 @@ public class MemberDAO extends BaseDAO {
 	}
 
 	// 사용자 & 관리자 로그인
-<<<<<<< HEAD
-	public MemberDTO loginMember(String userID, String userPW) { // 매개변수 ID, PW 
-		/*
-		 * loginMember() 함수 사용 이유 : member(T)에서 id와 pw가 일치하는 한 행을 가져오겠다. 
-		 * 
-		 * 매개변수 필요해??? 
-		 * 
-		 * 방법 1. 매개변수 : id, pw 
-		 * 방법 2. 매개변수 : memberDTO -> 4개 : null 
-		 * 방법 3. 매개변수 : String[] = {id, pw} -> 인덱스 번호 기억  
-		 * 
-		 * 반환값 ? 
-		 * 성공 여부만 확인? >> boolean
-		 * 성공했다면 로그인 정보도 출력? -> DTO, Map, Array
-		 * 	-> 환영합니다 "ooo" 님, 현재 잔액 ~ 
-		 * 	-> MemberDTO : 해당 사용자의 모든 정보를 담고 있다.
-		 * 
-		 * 
-		 * [ 작업 내용 ]
-		 * 존재 O 
-		 * 	로그인 성공 의미
-		 * 존재 X 
-		 * 	로그인 실패 의미 
-		 * 
-		 */
-=======
 	public MemberDTO loginMember(String userID, String userPW) {
 		MemberDTO dto = null;
 		sql = "select * from member where user_id = ?, user_pw =?";
->>>>>>> a6b49b1e965344ca92351391df802774f810d51a
-		
-		MemberDTO dto = null; // ? 반환 시, 사용하는 DTO 
-		sql = "select * from member where uesr_id = ?, uesr_pw =?"; // ? 
+
 		
 		try { // ? 
 			super.con = super.getConnection(); // 드라이버 연결한 데이터 저장 
