@@ -250,8 +250,8 @@ public class MemberDAO extends BaseDAO {
 		return result;
 	}
 	
-	public boolean findId(String id) {
-		boolean exist = false;
+	public MemberDTO findId(String id) {
+		MemberDTO dto = null;
 		sql = "select * from member where user_id = ?";
 		
 		try {
@@ -262,7 +262,16 @@ public class MemberDAO extends BaseDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) exist = true;
+			if(rs.next()) {
+				dto = new MemberDTO(
+						rs.getString("user_Name"),
+						rs.getString("user_ID"),
+						rs.getString("user_PW"),
+						rs.getString("user_Email"),
+						rs.getString("role"),
+						rs.getInt("reward")
+					);
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -270,7 +279,7 @@ public class MemberDAO extends BaseDAO {
 			super.closeDB(con, pstmt, rs);
 		}
 		
-		return exist;
+		return dto;
 	}
 	
 	public boolean findName(String user_name) {

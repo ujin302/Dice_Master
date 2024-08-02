@@ -18,7 +18,7 @@ public class User_UpdateService implements Member {
 	@Override
     public void execute() {
     	MemberDAO memberDAO = MemberDAO.getInstance();
-    	MemberDTO memberDTO = new MemberDTO();
+    	MemberDTO memberDTO = memberDAO.findId(user_id);
     
     	Scanner scan = new Scanner(System.in);
     	
