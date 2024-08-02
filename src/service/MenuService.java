@@ -5,6 +5,7 @@ import java.util.Scanner;
 import dto.MemberDTO;
 import service.user.*;
 import service.admin.*;
+import service.game.BigSmallGameService;
 import service.game.RangkingService;
 import service.game.UserInfoService;
 
@@ -211,6 +212,7 @@ public class MenuService {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 		}
+		System.out.println("=======================================");
 		String[] d = {
 	            "  _____  ",
 	            " |  __ \\ ",
@@ -251,8 +253,7 @@ public class MenuService {
 	    	System.out.println(d[line] + " " + i[line] + " " + c[line] + " " + e[line]);
 	    	sleep(300);
 	    	}
-		System.out.println("---------------------------------------");
-		System.out.println("---------------------------------------");
+	    System.out.println("=======================================");
 		
 		Scanner scanner = new Scanner(System.in);
 		while(true) {
@@ -260,13 +261,13 @@ public class MenuService {
 			System.out.println("[2] User Info");
 			System.out.println("[3] Rangking");
 			System.out.println("[4] 이전 화면으로");
-			System.out.println();
-			System.out.println("---------------------------------------");
+			System.out.println("=======================================");
 			System.out.print("원하는 메뉴를 선택해 주세요 : ");
 			num = scanner.nextInt();
+			System.out.println("=======================================");
 			
 			if(num == 1) {
-//				game = new BigSamllGameService();
+				game = new BigSmallGameService();
 			} else if(num == 2) {
 				game = new UserInfoService();
 			} else if(num == 3) {
