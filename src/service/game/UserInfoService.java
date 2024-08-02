@@ -28,4 +28,3 @@ public class UserInfoService implements Game {
 	    }
     }
 }
-
