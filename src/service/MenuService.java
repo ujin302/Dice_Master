@@ -5,7 +5,7 @@ import java.util.Scanner;
 import dto.MemberDTO;
 import service.user.*;
 import service.admin.*;
-import service.game.RangkingService;
+import service.game.RankingService;
 import service.game.UserInfoService;
 
 public class MenuService {
@@ -173,8 +173,8 @@ public class MenuService {
 		while(true) {
 			
 			System.out.println("\n----------------------------- 관리자 -----------------------------\n");
-			System.out.println("\t1. 회원 목록\t2. 회원 삭제\t3. 회원 관리\n\t4. 관리자 정보 수정 \t5. 로그아웃\t6. 탈퇴");
-			System.out.println("\t* 5, 6 번 선택 시, Main 메뉴로 이동합니다. \n");
+			System.out.println("\t1. 회원 목록\t2. 회원 관리\n\t3. 관리자 정보 수정 \t4. 로그아웃\t5. 탈퇴");
+			System.out.println("\t* 4, 5 번 선택 시, Main 메뉴로 이동합니다. \n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
 			
@@ -182,14 +182,12 @@ public class MenuService {
 			
 			if(num == 1) { // 회원 목록 
 				member = new Admin_UserListService();
-			} else if(num == 2) { // 회원 삭제
-				member = new Admin_UserDeleteService();
-			} else if(num == 3) { // 회원 관리 
+			} else if(num == 2) { // 회원 관리 
 				member = new Admin_UserControlService();
-			} else if(num == 4) { // 관리자 정보 수정 
+			} else if(num == 3) { // 관리자 정보 수정 
 				member = new Admin_UpdateService(user_id);
-			} else if(num == 5 || num == 6) { // 로그아웃 || 탈퇴
-				if(num == 5) System.out.print("로그아웃 되었습니다. ");
+			} else if(num == 4 || num == 5) { // 로그아웃 || 탈퇴
+				if(num == 4) System.out.print("로그아웃 되었습니다. ");
 				else new MemberService(2).delete();
 				
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
@@ -258,7 +256,7 @@ public class MenuService {
 		while(true) {
 			System.out.println("[1] Big, Small");
 			System.out.println("[2] User Info");
-			System.out.println("[3] Rangking");
+			System.out.println("[3] Ranking");
 			System.out.println("[4] 이전 화면으로");
 			System.out.println();
 			System.out.println("---------------------------------------");
@@ -270,7 +268,7 @@ public class MenuService {
 			} else if(num == 2) {
 				game = new UserInfoService();
 			} else if(num == 3) {
-				game = new RangkingService();
+				game = new RankingService();
 			} else if(num == 4) {
 				System.out.println("");
 				break;

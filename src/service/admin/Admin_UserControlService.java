@@ -16,7 +16,7 @@ public class Admin_UserControlService implements Member {
 		
 		int result = new MemberDAO().controlUser(standard);
 		
-		System.out.println(result + "명의 사용자를 제거하였습니다. ");
+		System.out.println(result + "명의 사용자를 삭제하였습니다. ");
 		if(result == 0) System.out.println("조건에 해당하는 사용자가 없습니다. ");
 	}
 

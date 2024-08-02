@@ -27,7 +27,7 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 	// 사용자 & 관리자 회원가입
 	public void joinMembership() {
 		String input = null;
-		dto = new MemberDTO();
+		dto = new MemberDTO(); // insert 용 
 		
 		System.out.println("안녕하세요. " + role + " 회원 가입을 위해 아래 정보를 작성해주세요.");
 		
@@ -48,9 +48,9 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 		while(true) {
 			System.out.print("사용자 아이디 : ");
 			input = sc.next();
-			boolean isExist = memberDAO.findId(input);
+			MemberDTO checkDTO = memberDAO.findId(input); // 중복 방지 확인 용 
 			
-			if(isExist) System.out.println(".아이디가 중복됩니다. 다시 입력해주세요.");
+			if(checkDTO != null) System.out.println("아이디가 중복됩니다. 다시 입력해주세요.");
 			else {
 				dto.setUser_ID(input);
 				input = null;
@@ -65,12 +65,12 @@ public class MemberService { // 사용자 & 관리자 공통 부분 처리
 			System.out.print("사용자 이메일 : ");
 			input = sc.next();
 			
-			if(!input.contains("@") || input.length() > 6) {
+			if(!input.contains("@")) {
 				System.out.println("올바른 이메일 형식이 아닙니다. 형식에 맞춰어 다시 작성해주세요.");
 				continue;
 			}
 			
-			boolean isExist = memberDAO.findId(input);
+			boolean isExist = memberDAO.findEmail(input);
 			
 			if(isExist) System.out.println("이메일이 중복됩니다. 다시 입력해주세요.");
 			else {

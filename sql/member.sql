@@ -8,11 +8,7 @@ create TABLE member(
  reward number(6,0)
 );
 
-<<<<<<< HEAD
-create Tabel gamehistory(
-=======
 create TABLE gamehistory(
->>>>>>> 1f2e8b2d423bd27e2607b3745766ecee2c877694
  user_id varchar2(15) not null,
  nickname varchar2(30) not null,
  reward number(6,0),

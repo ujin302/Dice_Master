@@ -10,7 +10,7 @@ public class Admin_UserDeleteService implements Member {
 
 	@Override
 	public void execute() {
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);	
 		MemberDAO memberDAO = new MemberDAO();
 		System.out.println("탈퇴시키고 싶은 사용자 아이디를 작성해주세요.");
         
