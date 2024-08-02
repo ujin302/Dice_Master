@@ -9,11 +9,11 @@ import service.Member;
 public class Uesr_UpdateService implements Member {
 	
 	// 사용자 정보 수정
-    @Override
+	@Override
     public void execute() {
     	MemberDAO memberDAO = MemberDAO.getInstance();
     	MemberDTO memberDTO = new MemberDTO();
-    	
+    
     	Scanner scan = new Scanner(System.in);
     	
         System.out.println("사용자 정보를 수정합니다.");

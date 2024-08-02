@@ -36,7 +36,7 @@ public class GameHistoryDAO extends BaseDAO{
 	}
 	public GameHistoryDTO findId(String id) {
 		GameHistoryDTO ghsDTO = null;
-		sql = "select * from member where user_id = ?";
+		sql = "select * from gamehistory where user_id = ?";
 		
 		try {
 			super.con = super.getConnection(); 
@@ -48,10 +48,10 @@ public class GameHistoryDAO extends BaseDAO{
 			
 			if(rs.next()) {
 				ghsDTO = new GameHistoryDTO(rs.getString("user_id"),
-						rs.getString("nikname"),
+						rs.getString("nickname"),
 						rs.getString("reward"),
-						rs.getString("game_start"),
-						rs.getString("game_over"));
+						rs.getString("time_start"),
+						rs.getString("time_over"));
 			}
 			
 		} catch (SQLException e) {
