@@ -199,7 +199,7 @@ public class MemberDAO extends BaseDAO {
 	public int updateAdmin(MemberDTO memberDTO) {
 		int exist = 0;
 		
-		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		sql = "update member set user_name=?, user_pw=?, user_email=? where user_id=? and role = ?";
 		
 		try {
 			super.con = super.getConnection();
@@ -209,6 +209,7 @@ public class MemberDAO extends BaseDAO {
 			pstmt.setString(2, memberDTO.getUser_PW());
 			pstmt.setString(3, memberDTO.getUser_Email());
 			pstmt.setString(4, memberDTO.getUser_ID());
+			pstmt.setString(5, RoleService.ADMIN);
 			
 			exist = pstmt.executeUpdate();
 		
@@ -226,7 +227,7 @@ public class MemberDAO extends BaseDAO {
 	public int updateUser(MemberDTO memberDTO) {
 		int result = 0;
 		
-		sql = "update member set admin_name=?, user_pw=?, user_email=? where user_id=?";
+		sql = "update member set user_name=?, user_pw=?, user_email=? where user_id=? and role = ?";
 		
 		try {
 			super.con = super.getConnection();
@@ -236,6 +237,7 @@ public class MemberDAO extends BaseDAO {
 			pstmt.setString(2, memberDTO.getUser_PW());
 			pstmt.setString(3, memberDTO.getUser_Email());
 			pstmt.setString(4, memberDTO.getUser_ID());
+			pstmt.setString(5, RoleService.USER);
 			
 			result = pstmt.executeUpdate();
 			

@@ -123,7 +123,6 @@ public class MenuService {
 		 */
 		
 		sc = new Scanner(System.in);
-		Member member = null;
 		
 		while(true) {
 			System.out.println("\n----------------------------- 사용자 -----------------------------\n");
@@ -137,7 +136,7 @@ public class MenuService {
 			if(num == 1) {
 				gameMenu(user_id);
 			}else if(num == 2) {
-				member = new User_UpdateService();
+				new User_UpdateService(user_id).execute();
 			}
 			else if(num == 3 || num == 4) {
 				if(num == 3) System.out.print("로그아웃 되었습니다. ");
@@ -153,7 +152,7 @@ public class MenuService {
 		
 	}
 	
-	public void adminMenu() {
+	public void adminMenu(String user_id) {
 		/*
 		 * 1. 회원 목록 >> new Admin_UserList();
 		 * 2. 회원 삭제 >> new Admin_UserDelete();
@@ -188,7 +187,7 @@ public class MenuService {
 			} else if(num == 3) { // 회원 관리 
 				member = new Admin_UserControlService();
 			} else if(num == 4) { // 관리자 정보 수정 
-				member = new Admin_UpdateService();
+				member = new Admin_UpdateService(user_id);
 			} else if(num == 5 || num == 6) { // 로그아웃 || 탈퇴
 				if(num == 5) System.out.print("로그아웃 되었습니다. ");
 				else new MemberService(2).delete();
