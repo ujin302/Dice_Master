@@ -83,8 +83,13 @@ public class MemberDAO extends BaseDAO {
 								);
 			}
 			
+<<<<<<< HEAD
+		} catch (SQLException e) { 
+			e.printStackTrace();
+=======
 		} catch (SQLException e) {
 			e.printStackTrace(); // e 변수에 try 예외 정보 전달. 빨간줄 출력 
+>>>>>>> dcc2964550d80025d89c6481a16372a321047ec0
 		} finally {
 			super.closeDB(con, pstmt, rs); // 편하게 가져다 쓰기 위해서 함수 호출 
 		}
@@ -93,7 +98,7 @@ public class MemberDAO extends BaseDAO {
 		return dto; 
 		
 	}
-
+		
 	// 사용자 & 관리자 탈퇴
 	public int deleteMember(String userID, String userPW) {
 		int num = 0;
