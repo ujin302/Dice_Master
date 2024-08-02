@@ -185,7 +185,6 @@ public class GameHistoryDAO extends BaseDAO{
 		try {
 			super.con = super.getConnection();
 			for(String n : nicknameList) {
-				System.out.println(n);
 				String[] data = new String[3];
 				super.pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, n);
