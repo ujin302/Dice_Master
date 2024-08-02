@@ -35,6 +35,7 @@ public class BaseDAO {
 	public Connection getConnection() {
 		try {// 드라이버 연결시 오류 발생 할 경우 대비 
 			// con = 연결된 정보 담음. DriverManager : 오라클 DB의 드라이버와 자바 프로젝트 연결 시, 사용 
+			DriverManager.setLoginTimeout(10); 
 			con = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -5,7 +5,6 @@ import java.util.Scanner;
 import dto.MemberDTO;
 import service.user.*;
 import service.admin.*;
-import service.game.BigSamllGameService;
 import service.game.RangkingService;
 import service.game.UserInfoService;
 
@@ -99,6 +98,7 @@ public class MenuService {
 			
 			if(num == 1 || num == 2) { // 로그인 진행
 				new MemberService(num).login();
+				break;
 			}else if(num == 3) {
 				System.out.println("Main 메뉴로 돌아갑니다. \n");
 				break;
