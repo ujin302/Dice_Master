@@ -25,7 +25,7 @@ public class MenuService {
 		while(isSelect) {
 			
 			System.out.println("\n------------------------------ Main ------------------------------\n");
-			System.out.println("\t1. 회원가입\t2. 로그인\t3. 종료 \n");
+			System.out.println("\t1. 회원가입\t2. 로그인\t       3. 종료 \n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
 			
@@ -57,8 +57,8 @@ public class MenuService {
 		
 		while(true) {
 			
-			System.out.println("\n----------------------------- 회원가입 -----------------------------\n");
-			System.out.println("\t1. 사용자\t2. 관리자\t3. Main 메뉴\n");
+			System.out.println("\n----------------------------- 회원가입 ------------------------------\n");
+			System.out.println("\t 1.사용자\t 2.관리자\t 3.Main 메뉴\n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
 			
@@ -90,8 +90,8 @@ public class MenuService {
 		
 		while(true) {
 			
-			System.out.println("\n----------------------------- 로그인 -----------------------------\n");
-			System.out.println("\t1. 사용자\t2. 관리자\t3. Main 메뉴\n");
+			System.out.println("\n----------------------------- 로그인 -------------------------------\n");
+			System.out.println("\t 1.사용자\t 2.관리자\t 3.Main메뉴\n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
 			
@@ -126,8 +126,8 @@ public class MenuService {
 		sc = new Scanner(System.in);
 		
 		while(true) {
-			System.out.println("\n----------------------------- 사용자 -----------------------------\n");
-			System.out.println("\t1. 게임\t2. 사용자 정보 수정\t3. 로그아웃\t4. 탈퇴");
+			System.out.println("\n----------------------------- 사용자 -------------------------------\n");
+			System.out.println("\t  1.게임\t  2.사용자 정보 수정\t  3.로그아웃\t 4.탈퇴");
 			System.out.println("\t* 3, 4 번 선택 시, Main 메뉴로 이동합니다. \n");
 			System.out.println("------------------------------------------------------------------");
 			System.out.print("\t메뉴 선택 : ");
@@ -173,7 +173,7 @@ public class MenuService {
 		
 		while(true) {
 			
-			System.out.println("\n----------------------------- 관리자 -----------------------------\n");
+			System.out.println("\n----------------------------- 관리자 -------------------------------\n");
 			System.out.println("\t1. 회원 목록\t2. 회원 관리\n\t3. 관리자 정보 수정 \t4. 로그아웃\t5. 탈퇴");
 			System.out.println("\t* 4, 5 번 선택 시, Main 메뉴로 이동합니다. \n");
 			System.out.println("------------------------------------------------------------------");
