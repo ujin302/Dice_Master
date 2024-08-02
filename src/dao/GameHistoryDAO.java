@@ -28,15 +28,39 @@ public class GameHistoryDAO extends BaseDAO{
 		return instance;
 	}
 	//게임 시작 시 user_id, nickname, time_start
-	public int saveGameHistory(GameHistoryDTO gameHistoryDTO) {
-		int num = 0;
+		public int GameHistory(GameHistoryDTO gameHistoryDTO) {
+			int num = 0;
+			sql = "insert into gameHistory values (?, ?, ?, ?, ?)";
+			try {
+				super.con = super.getConnection();
+				super.pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, gameHistoryDTO.getUser_id());
+				pstmt.setString(2, gameHistoryDTO.getNickname());
+				pstmt.setInt(3, gameHistoryDTO.getReward());
+				pstmt.setTimestamp(4, gameHistoryDTO.getTime_start());
+				pstmt.setTimestamp(5, gameHistoryDTO.getTime_over());
+
+				
+				num = pstmt.executeUpdate();
+				if(num == 0) {
+					System.out.println("test");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println();
+				System.out.println( "sql"+ e.getSQLState());
+				System.out.println("ErrorCode : " + e.getErrorCode());
+				System.out.println( "msg"+ e.getLocalizedMessage());
+				
+			} finally {
+				super.closeDB(con, pstmt);
+			}
+			
+			
+			return num;
 		
-		Connection con = super.getConnection();
-		
-		
-		return num;
-		
-	}
+		}
 	public GameHistoryDTO findId(String id) {
 		GameHistoryDTO ghsDTO = null;
 		sql = "select * from gamehistory where user_id = ?";
@@ -52,9 +76,9 @@ public class GameHistoryDAO extends BaseDAO{
 			if(rs.next()) {
 				ghsDTO = new GameHistoryDTO(rs.getString("user_id"),
 						rs.getString("nickname"),
-						rs.getString("reward"),
-						rs.getString("time_start"),
-						rs.getString("time_over"));
+						rs.getInt("reward"),
+						rs.getTimestamp("time_start"),
+						rs.getTimestamp("time_over"));
 			}
 			
 		} catch (SQLException e) {
