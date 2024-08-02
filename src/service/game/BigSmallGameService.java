@@ -24,7 +24,7 @@ public class BigSmallGameService implements Game{
 	
 	// 게임 시작 시, 문구 출력 
 	public void printBanner() {
-		System.out.println("===============================================================");
+		System.out.println("=====================================================================================");
 		String[] b = {
                 "  ____   ",
                 " |  _ \\  ",
@@ -95,7 +95,7 @@ public class BigSmallGameService implements Game{
             		           + m[line] + " " + a[line] + " " 
                                + l[line] + " " + l[line]);
         }
-        System.out.println("===============================================================");
+        System.out.println("=====================================================================================");
 	}
 	
 	
@@ -176,6 +176,7 @@ public class BigSmallGameService implements Game{
         if (!success) {
             System.out.println("모든 기회를 소진했습니다. 주사위 합은" + diceSum + "이었습니다.");
             System.out.println();
+            System.out.println("=======================================");
         }
         
         return reward;
@@ -184,6 +185,7 @@ public class BigSmallGameService implements Game{
 	
 	@Override
 	public void execute(String user_id) {
+		printBanner();
 		/*
 		 * 
 		 * 1. member(T) id, nickname -> Insert gh(T) 
