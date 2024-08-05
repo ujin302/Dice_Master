@@ -12,6 +12,7 @@ public class UserInfoService implements Game {
 		GameHistoryDAO gameHistoryDAO = GameHistoryDAO.getInstance(); //싱글톤
 	    GameHistoryDTO gameHistoryDTO = gameHistoryDAO.findId(user_id); //게임기록검색
 	    MemberDTO memberDTO = gameHistoryDAO.findMemberId(user_id);
+	    
 	    //gameHistoryDTO가 null이 아닐때만 출력(게임기록)
 	    if (gameHistoryDTO != null) {
 	    	String[] result = new RankingService().userRank(user_id, gameHistoryDAO.getRank(), false);

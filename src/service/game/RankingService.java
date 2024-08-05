@@ -50,7 +50,7 @@ public class RankingService implements Game {
 		
 		
 		
-		if(result == null) { // 게임을 진행한적 없을 경우 
+		if(result[0] == null) { // 게임을 진행한적 없을 경우 
 			System.out.println("\n게임 플레이 후, 순위를 확인해주세요. ");
 		} else {
 			System.out.println("\n" + result[0] + "님은 순위는 " + result[1] + "등 이며, 상위 " + result[2] + "%입니다.");
